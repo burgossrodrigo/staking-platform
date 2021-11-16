@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import StakeForm from './formStake'
 
 //components
 
@@ -124,6 +125,15 @@ export default function HorizontalLinearStepper() {
 
         </StepperWrapper>
 
+
+            :
+
+            activeStep === 1
+
+            ?
+            <StepperWrapper>
+              <StakeForm />
+            </StepperWrapper>
 
             :
 
