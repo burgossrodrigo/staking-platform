@@ -1,6 +1,12 @@
 import { Grid, Container } from '@mui/material'
+
+//COMPONENTS
+
 import Header from './components/header'
 import useWallet from './hooks/useWallet'
+import { StyledCard, CardWrapper, StyledBodyText } from './components/cardContent'
+import  HorizontalLinearStepper  from './components/stepper'
+
 
 //HOOKS
 
@@ -8,6 +14,7 @@ import useWallet from './hooks/useWallet'
 //MUI-MATERIAL
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Typography, Divider } from '@mui/material';
 
 //CONNECTORS
 
@@ -51,18 +58,30 @@ function App() {
         </Container>
         <Grid container>
           <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-            <div>  
-                {/* STAKE WITHDRAW UNSTAKE */}
-                {/* NUMBER OF STAKERS */}
-                {/* TOTAL BSC MEMEPAD STAKED */}
-                {/* APY */}
-            </div>
+            <CardWrapper>  
+                <StyledCard>
+                  <Typography variant='h5'>Number os stakers</Typography>
+                  <Divider />
+                  <StyledBodyText variant='h6'>1000</StyledBodyText>
+                </StyledCard>
+                <StyledCard>
+                <Typography variant='h5'>Total staked</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'>350000000</StyledBodyText>
+                </StyledCard>
+                <StyledCard>
+                  <Typography variant='h5'>APY</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'>15% </StyledBodyText>
+                </StyledCard>
+
+            </CardWrapper>
             <div>    
                 {/* STAKE YOUR BSC MEMEPAD HERE */}
                 {/* CHECKPOINTS */}
             </div>
             <div>
-                {/*THE CHECKPOINTS*/}
+                <HorizontalLinearStepper />
             </div>    
             </Grid>
           <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
