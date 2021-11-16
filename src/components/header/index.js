@@ -4,8 +4,6 @@ import Account from '../account'
 import Wallets from '../wallets'
 import styled from 'styled-components'
 import { Container, AppBar, Button, Modal, Box } from '@mui/material'
-import Bg2 from '../../assets/image/bg-2.jpg'
-
 import useWallet from '../../hooks/useWallet'
 
 export default function Header({openWallet, setOpenWallet}) {
@@ -26,7 +24,6 @@ export default function Header({openWallet, setOpenWallet}) {
   display: flex;
   flex-direction: row;
   height: 10vh;
-  background-image: url(${Bg2});
  
   `
 

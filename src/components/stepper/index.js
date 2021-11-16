@@ -1,12 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import StakeForm from './formStake'
+import { CardActions, Divider, Typography, 
+        Button, StepLabel, Step, 
+        Stepper, Box  } from '@mui/material'
 
 //components
 
@@ -138,10 +134,101 @@ export default function HorizontalLinearStepper() {
 
             :
 
-            activeStep
+            activeStep === 2
+
+            ? <StepperWrapper>
+        
+            <StyledCard>
+                <Typography>Pre-authorization</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'>You want to stake the amount of {} BNB with </StyledBodyText>
+                <StyledBodyText variant='h6'>the amount of {} BSCMEMEPAD?</StyledBodyText>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    I want to
+                  </Button>
+              </CardActions>
+            </StyledCard>
+
+            <StyledCard>
+            </StyledCard>
+
+            <StyledCard>
+            </StyledCard>              
+
+        </StepperWrapper>
+
+        :
+
+        activeStep === 3
+
+        ? <StepperWrapper>
+            <StyledCard>
+            </StyledCard>
+
+            <StyledCard>
+            <Typography>Authorization</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'>Stake the amount of {} BNB with </StyledBodyText>
+                <StyledBodyText variant='h6'>the amount of {} BSCMEMEPAD</StyledBodyText>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Stake
+                  </Button>
+              </CardActions>
+            </StyledCard>
+
+            <StyledCard>
+            </StyledCard>
+        </StepperWrapper>
+
+        : activeStep === 4
+        ? <StepperWrapper>
+        <StyledCard>
+        </StyledCard>
+
+        <StyledCard>
+        </StyledCard>
+
+        <StyledCard>
+        <Typography>Authorization</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'></StyledBodyText>
+                <StyledBodyText variant='h6'></StyledBodyText>
+        </StyledCard>
+    </StepperWrapper>
+
+      :
+
+      <StepperWrapper>
+        
+            <StyledCard>
+                <Typography>Connected</Typography>
+                <Divider />
+                <StyledBodyText variant='h6'>If not connected, click on the button on the top right corner</StyledBodyText>
+            </StyledCard>
+
+            <StyledCard>
+            <Typography>BSCMPAD avaiable</Typography>
+            <Divider />
+            <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+            </StyledCard>
+
+            <StyledCard>
+            <Typography >BNB avaiable</Typography>
+            <Divider />
+            <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+            </StyledCard>
+
+            <StyledCard>
+            <Typography>Eligible to stake</Typography>
+            <Divider />
+            <StyledBodyText variant='h6'>You cannot stake if you have a active BSCPAD unstaken/witdraw request</StyledBodyText>
+            </StyledCard>
+
+        </StepperWrapper>    
         
          }
-          <Typography>Caramba {activeStep + 1}</Typography>
           
           
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -154,11 +241,6 @@ export default function HorizontalLinearStepper() {
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
 
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}

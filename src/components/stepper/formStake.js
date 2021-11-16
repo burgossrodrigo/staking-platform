@@ -27,7 +27,6 @@ const StakeForm = () => {
               min={0}
               max={100}
             />
-            <Slider defaultValue={30} step={10} marks min={10} max={110} disabled />
           </Box>
         );
       }
