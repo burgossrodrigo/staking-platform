@@ -5,9 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
 import Divider from '@mui/material/Divider';
-import useWeb3 from '@web3-react/core'
 
 //components
 
