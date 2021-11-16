@@ -1,11 +1,14 @@
-import { Grid, Container } from '@mui/material'
+//STYLE
+
+import GlobalStyle from './style/globalStyle'
+
 
 //COMPONENTS
 
 import Header from './components/header'
 import useWallet from './hooks/useWallet'
 import { StyledCard, CardWrapper, StyledBodyText } from './components/cardContent'
-import  HorizontalLinearStepper  from './components/stepper'
+import BasicTabs from './components/tabs'
 
 
 //HOOKS
@@ -15,6 +18,7 @@ import  HorizontalLinearStepper  from './components/stepper'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Typography, Divider } from '@mui/material';
+import { Grid, Container } from '@mui/material'
 
 //CONNECTORS
 
@@ -52,6 +56,7 @@ function App() {
     
 
       <ThemeProvider theme={darkTheme}>
+      <GlobalStyle />
       <Web3ReactProvider getLibrary={getLibrary}>
         <Container maxWidth='lg'>
           <Header {...wallet} />
@@ -81,7 +86,7 @@ function App() {
                 {/* CHECKPOINTS */}
             </div>
             <div>
-                <HorizontalLinearStepper />
+                <BasicTabs />
             </div>    
             </Grid>
           <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
