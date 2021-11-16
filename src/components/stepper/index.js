@@ -94,7 +94,7 @@ export default function HorizontalLinearStepper() {
         <React.Fragment>
           
           {/* WHERE MAGIC HAPPENS*/}
-          {activeStep === 1 
+          {activeStep === 0 
           
           ? <StepperWrapper>
         
