@@ -59,10 +59,10 @@ export default function BasicTabs() {
          <HorizontalLinearStepper />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+      <HorizontalLinearStepper />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <HorizontalLinearStepper />
       </TabPanel>
     </Box>
   );
