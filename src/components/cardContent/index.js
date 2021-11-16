@@ -1,5 +1,6 @@
 import { Card, Paper, Typography } from '@mui/material'
 import styled from 'styled-components'
+import Bg1 from '../../assets/image/bg-1.jpg'
 
 export const StyledCard = styled(Card)`
 
@@ -9,6 +10,7 @@ export const StyledCard = styled(Card)`
     border-radius: 5px 5px 5px 5px;
     background-color: #1B1F22;
     padding: 15px; 
+    background-image: url(${Bg1});
 
 
 `
