@@ -1,0 +1,25 @@
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
+export function valuetext(value) {
+  return `${value}%`;
+}
+
+export default function DiscreteSlider() {
+  return (
+    <Box sx={{ width: 300 }}>
+      <Slider
+        aria-label="TOkens"
+        defaultValue={30}
+        getAriaValueText={valuetext}
+        valueLabelDisplay="auto"
+        step={10}
+        marks
+        min={0}
+        max={100}
+      />
+      <Slider defaultValue={30} step={10} marks min={10} max={110} disabled />
+    </Box>
+  );
+}
