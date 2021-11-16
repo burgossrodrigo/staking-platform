@@ -11,11 +11,12 @@ const StakeForm = () => {
 
 
 
-    return(
+    return(<>
 
-        <StyledTextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <StyledTextField id="outlined-basic" label="BNB" variant="outlined" />
+        <StyledTextField id="outlined-basic" label="BSCMEMEPAD" variant="outlined" />
         
-    )
+    </>)
 
 }
 

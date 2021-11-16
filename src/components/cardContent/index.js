@@ -39,5 +39,6 @@ export const StepperWrapper = styled.div`
 
     display: flex;
     flex-direction: row;
+    min-height: 370px;
 
 `
