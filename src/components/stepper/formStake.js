@@ -1,5 +1,6 @@
 import { TextField } from '@mui/material'
 import styled from 'styled-components'
+import { StyledFormWrapper } from '..'
 
 const StyledTextField = styled(TextField)`
 
@@ -12,10 +13,10 @@ const StakeForm = () => {
 
 
     return(<>
-
-        <StyledTextField id="outlined-basic" label="BNB" variant="outlined" />
-        <StyledTextField id="outlined-basic" label="BSCMEMEPAD" variant="outlined" />
-        
+        <StyledFormWrapper>
+            <StyledTextField id="outlined-basic" label="BNB" variant="outlined" />
+            <StyledTextField id="outlined-basic" label="BSCMEMEPAD" variant="outlined" />
+        </StyledFormWrapper>
     </>)
 
 }
