@@ -9,10 +9,9 @@ const Account = ({openWallet, setOpenWallet}) => {
 
 	width: max-content;
 	height: 5vh;
-	color: FF4530;
   position: relative;
   margin: 2vh;
-  margin-left: 88vw;
+  margin-left: 60vw;
   `
 
 
