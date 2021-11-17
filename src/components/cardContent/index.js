@@ -1,14 +1,18 @@
 import { Card, Paper, Typography } from '@mui/material'
 import styled from 'styled-components'
+import bg from '../../assets/image/diamond-coin.png'
 
 export const StyledCard = styled(Card)`
 
     width: 25vw;
-    min-width: 20vh;
+    height: 38vh;
     margin: 20px;
     border-radius: 5px 5px 5px 5px;
     background-color: #1B1F22;
-    padding: 15px; 
+    padding: 15px;
+    background-image: url(${bg});
+    background-position: right 110% top -40%;
+    background-repeat: no-repeat;
 
 
 `
@@ -32,6 +36,7 @@ export const StyledPaper = styled(Paper)`
 export const StyledBodyText = styled(Typography)`
 
     margin: 15px;
+    opacity: 1;
 
 `
 
