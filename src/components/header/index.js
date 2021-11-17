@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core'
 import Account from '../account'
 import Wallets from '../wallets'
 import styled from 'styled-components'
-import { Container, AppBar, Button, Modal, Box, Typography } from '@mui/material'
+import { Container, AppBar, Button, Modal, Box } from '@mui/material'
 import useWallet from '../../hooks/useWallet'
 import banner from '../../assets/image/banner-white.png'
 
@@ -38,12 +38,6 @@ export default function Header({openWallet, setOpenWallet}) {
   margin-left: 60vw;
   `
 
-  const StyledLogo = styled(Typography)`
-  
-    margin-left: 5vw;
-    margin-top: 2vh;
-  
-  `
 
   const { active, chainId } = useWeb3React()
 	
@@ -81,7 +75,7 @@ const changeId = async () => {
     <>
     <Container maxWidth='md'>
       <StyledNavbar>
-       <img src={banner} />
+       <img src={banner} alt="logo" />
       <AccountDiv>{
       
 
