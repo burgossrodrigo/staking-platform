@@ -53,21 +53,21 @@ function Wallets() {
             
             :
 
-            'No wallet connected :(' 
+            <Button 
+            onClick={connect}
+            color='secondary'
+            variant='contained'
+            startIcon={            <Icon>
+              <StyledIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/512px-MetaMask_Fox.svg.png"/>
+            </Icon>  }
+            >Connect to MetaMask
+            </Button>
         
             }
         </CardContent>  
         <CardContent>
 
-        <Button 
-        onClick={connect}
-        color='secondary'
-        variant='contained'
-        startIcon={            <Icon>
-				  <StyledIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/512px-MetaMask_Fox.svg.png"/>
-				</Icon>  }
-        >Connect to MetaMask
-        </Button>
+
 
 
         </CardContent>  
@@ -86,13 +86,7 @@ function Wallets() {
             
             : 
             
-            <Button onClick={disconnect}
-            color='secondary'
-            variant='contained'
-            startIcon={            <Icon>
-                      <StyledIcon src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png"/>
-                    </Icon>  }
-           >Disconnect</Button>
+            <div />
             
             }
 

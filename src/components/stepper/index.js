@@ -3,6 +3,7 @@ import StakeForm from './formStake'
 import { CardActions, Divider, Typography, 
         Button, StepLabel, Step, 
         Stepper, Box  } from '@mui/material'
+import useBnbBalance from '../../hooks/useBnbBalance'
 
 //components
 
@@ -14,6 +15,7 @@ const steps = ['Checkpoints', 'Ammount to stake', 'Pre-authorization', 'Confirm'
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const getBnbBalance = useBnbBalance()
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -115,7 +117,7 @@ export default function HorizontalLinearStepper() {
 
             ?
             <StepperWrapper>
-              <StakeForm />
+              <StakeForm {...getBnbBalance}/>
             </StepperWrapper>
 
             :
