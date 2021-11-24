@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { TextField, Box, Slider } from '@mui/material'
 import styled from 'styled-components'
 import { StyledFormWrapper } from '..'
-import { web3, ETH_ADDRESS} from '../../utils/web3'
+import { web3 } from '../../utils/web3'
 import { useWeb3React } from '@web3-react/core'
 import { Typography } from '@mui/material'
 
@@ -14,24 +14,18 @@ const StyledTextField = styled(TextField)`
 
 const StakeForm = ({bnbBalance, setBnbBalance}) => {
 
-  const { account } = useWeb3React()
+  const { account, active } = useWeb3React()
   const [formValue, setformValue] = useState()
 
-  useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    fetch(
-      `
-    https://api.bscscan.com/api
-   ?module=account
-   &action=balance
-   &address=${account}&apikey=VPBWF48NC149A1VJA5MDHUNJK74N1KJB2S
-    `
-    , {cache: "force-cache"})
-        .then(response => response.json())
-        .then(fetchData => setBnbBalance(fetchData));
-  
-  // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, [setBnbBalance]);
+  const balanceOfBnB = async () => { 
+    if(active){
+    await web3.eth.getBalance(account) 
+    .then(response => setBnbBalance(response))
+    .then(console.log(bnbBalance))
+  }
+  }
+
+  balanceOfBnB()
 
 
 /*
@@ -47,7 +41,6 @@ const StakeForm = ({bnbBalance, setBnbBalance}) => {
 */    
 
     const ethData = bnbBalance
-    console.log(bnbBalance.result)
     function valuetext() {
         return `${ethData}%`;
       }
@@ -66,7 +59,7 @@ const StakeForm = ({bnbBalance, setBnbBalance}) => {
               defaultValue={30}
               getAriaValueText={valuetext}
               valueLabelDisplay="auto"
-              step={10}
+              step={5}
               marks
               min={0}
               max={100}
@@ -79,9 +72,10 @@ const StakeForm = ({bnbBalance, setBnbBalance}) => {
     
     <>
         <StyledFormWrapper>
-            <Typography>{}</Typography>
-            <StyledTextField id="outlined-basic" label="BNB" variant="outlined" />
+            <Typography>Max: {bnbBalance}</Typography>
+            <StyledTextField id="outlined-basic" onChange={handleChange} label={formValue === null ? "BNB" : formValue} variant="outlined" />
             <DiscreteSlider />
+            <Typography>Max: {bnbBalance}</Typography>            
             <StyledTextField id="outlined-basic" label="BSCMEMEPAD" variant="outlined" />
             <DiscreteSlider />
         </StyledFormWrapper>

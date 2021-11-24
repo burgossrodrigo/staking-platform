@@ -2,9 +2,9 @@ import {  useState } from 'react'
 
 const useInput = () => {
 
-    const [useInput, setUSeInput] = useState()
+    const [input, setInput] = useState()
 
-    return { useInput, setUSeInput }
+    return { input, setInput }
 
 }
 

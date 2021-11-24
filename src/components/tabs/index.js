@@ -5,9 +5,11 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import  HorizontalLinearStepper  from '../stepper'
+import useBnbBalance from '../../hooks/useBnbBalance'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
 
   return (
     <div
@@ -46,6 +48,8 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
+  const getBnbBalance = useBnbBalance()
+
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -56,7 +60,7 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-         <HorizontalLinearStepper />
+         <HorizontalLinearStepper {...getBnbBalance} />
       </TabPanel>
       <TabPanel value={value} index={1}>
       <HorizontalLinearStepper />

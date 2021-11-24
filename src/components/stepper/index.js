@@ -4,6 +4,9 @@ import { CardActions, Divider, Typography,
         Button, StepLabel, Step, 
         Stepper, Box  } from '@mui/material'
 import useBnbBalance from '../../hooks/useBnbBalance'
+import { useWeb3React } from '@web3-react/core'
+//import BNB from '../../contracts/BNB.json'
+import { web3 } from '../../constants'
 
 //components
 
@@ -12,10 +15,24 @@ import { StyledCard, StyledBodyText, StepperWrapper } from '../cardContent'
 const steps = ['Checkpoints', 'Ammount to stake', 'Pre-authorization', 'Confirm', 'Confirmation'];
 
 
-export default function HorizontalLinearStepper() {
+
+
+export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const { active, account } = useWeb3React()
   const getBnbBalance = useBnbBalance()
+
+  const balanceOfBnB = async () => { 
+    if(active){
+    await web3.eth.getBalance(account) 
+    .then(response => setBnbBalance(response))
+    .then(console.log(bnbBalance))
+  }
+  }
+
+  balanceOfBnB()
+
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -80,14 +97,14 @@ export default function HorizontalLinearStepper() {
         <React.Fragment>
           
           {/* WHERE MAGIC HAPPENS*/}
-          {activeStep === 0 
+          {activeStep === 0 && active
           
           ? <StepperWrapper>
         
             <StyledCard>
                 <Typography>Connected</Typography>
                 <Divider />
-                <StyledBodyText variant='h6'>If not connected, click on the button on the top right corner</StyledBodyText>
+                <StyledBodyText variant='h6'>{account.substring(0, 6)}...{account.substring(account.length - 4)}</StyledBodyText>
             </StyledCard>
 
             <StyledCard>
@@ -99,7 +116,7 @@ export default function HorizontalLinearStepper() {
             <StyledCard>
             <Typography >BNB avaiable</Typography>
             <Divider />
-            <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+            <StyledBodyText variant='h6'>Current balance:<br />{bnbBalance}</StyledBodyText>
             </StyledCard>
 
             <StyledCard>
@@ -109,6 +126,38 @@ export default function HorizontalLinearStepper() {
             </StyledCard>                     
 
         </StepperWrapper>
+
+        :
+
+            activeStep === 0 && !active
+                      
+            ? <StepperWrapper>
+
+              <StyledCard>
+                  <Typography>Connected</Typography>
+                  <Divider />
+                  <StyledBodyText variant='h6'>If not connected, click on the button on the top right corner</StyledBodyText>
+              </StyledCard>
+
+              <StyledCard>
+              <Typography>BSCMPAD avaiable</Typography>
+              <Divider />
+              <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+              </StyledCard>
+
+              <StyledCard>
+              <Typography >BNB avaiable</Typography>
+              <Divider />
+              <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+              </StyledCard>
+
+              <StyledCard>
+              <Typography>Eligible to stake</Typography>
+              <Divider />
+              <StyledBodyText variant='h6'>You cannot stake if you have a active BSCPAD unstaken/witdraw request</StyledBodyText>
+              </StyledCard>                     
+
+            </StepperWrapper>
 
 
             :
@@ -230,7 +279,7 @@ export default function HorizontalLinearStepper() {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
 
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} disabled={!active}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>

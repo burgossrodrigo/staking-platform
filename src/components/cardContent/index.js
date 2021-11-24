@@ -8,7 +8,7 @@ export const StyledCard = styled(Card)`
     height: 38vh;
     margin: 20px;
     border-radius: 5px 5px 5px 5px;
-    background-color: #1B1F22;
+    background-color: white;
     padding: 15px;
     background-image: url(${bg});
     background-position: right 110% top -40%;

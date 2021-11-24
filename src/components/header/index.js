@@ -3,7 +3,9 @@ import { useWeb3React } from '@web3-react/core'
 import Account from '../account'
 import Wallets from '../wallets'
 import styled from 'styled-components'
-import { Container, AppBar, Button, Modal, Box } from '@mui/material'
+import { Container, AppBar, Button, 
+        Modal, Box, Breadcrumbs,
+        Link } from '@mui/material'
 import useWallet from '../../hooks/useWallet'
 import banner from '../../assets/image/banner-white.png'
 
@@ -35,7 +37,15 @@ export default function Header({openWallet, setOpenWallet}) {
 	height: 5vh;
   position: relative;
   margin: 2vh;
-  margin-left: 60vw;
+  margin-left: 32vw;
+  `
+
+  const StyledBreadcrumbs = styled(Breadcrumbs)`
+  
+  width: 35vw;
+  font-size: 1.8rem;
+  color: white;
+  
   `
 
 
@@ -75,7 +85,16 @@ const changeId = async () => {
     <>
     <Container maxWidth='md'>
       <StyledNavbar>
-       <img src={banner} alt="logo" />
+
+      <img src={banner} width={200} height={50} alt="logo" />
+       <StyledBreadcrumbs>
+       <Link color="secondary" underline="hover" href='/BSCMemepad'>
+        Home
+       </Link>
+       <Link color="secondary" underline="hover" href='/BSCMemepad'>
+        BSCMemepad
+       </Link>
+       </StyledBreadcrumbs>
       <AccountDiv>{
       
 
