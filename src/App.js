@@ -1,4 +1,4 @@
-import RouteComponent from './routes'
+
 import Home from './pages/Home'
 import BSCMemepad from './pages/BSCMemepad'
 import usePage from './hooks/usePage'
@@ -55,7 +55,7 @@ function App({page}) {
       <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
       <Web3ReactProvider getLibrary={getLibrary}>
-        {page === 'home' ? <Home /> : <BSCMemepad /> }    
+        {page === 'home' ? <Home {...pages} /> : <BSCMemepad /> }    
       </Web3ReactProvider>
       </ThemeProvider>
 
