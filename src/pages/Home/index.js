@@ -17,7 +17,7 @@ const Home = () => {
 
     const StyledCard = styled(Card)`
     
-        width: 50vw;
+    width: 30vw;
         margin: 0 auto;
         color: black;
 
@@ -34,7 +34,7 @@ const Home = () => {
     
         background-color: black;
         height: 30%;
-        width: 50vw;
+        width: 100%;
         position: relative;
     
     `
@@ -43,7 +43,7 @@ const Home = () => {
     
     background-color: white;
     height: 70%;
-    width: 50vw;
+    width: 100%;
     position: relative;
 
 `
@@ -92,7 +92,7 @@ const Home = () => {
     return (<>
         <Header {...page} {...wallet} />
         <StyledTitle variant="h2" color="contrast">Active and upcoming vaults</StyledTitle>
-        <StyledHomeContainer container>
+        <StyledHomeContainer container >
             <StyledHomeGridItem item xs={12} sm={12} md={6} lg={4} xl={4}>
                 <StyledCard>
                     <StyledCardBanner>
