@@ -1,8 +1,6 @@
 import { Grid, Card, CardActions, CardContent,
          Typography, Alert, Button } from '@mui/material'
-import Header from '../../components/header'
 import usePage from '../../hooks/usePage'
-import useWallet from '../../hooks/useWallet'
 import styled from 'styled-components'
 import BScMemepad from '../../assets/image/corrected.png'
 import KSM from '../../assets/image/LP.png'
@@ -13,7 +11,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const Home = () => {
 
     const pages = usePage()
-    const wallet = useWallet()
 
     const StyledCard = styled(Card)`
     
@@ -92,7 +89,6 @@ const Home = () => {
     console.log(pages.page)
 
     return (<>
-        <Header {...pages} {...wallet} />
         <StyledTitle variant="h2" color="contrast">Active and upcoming vaults</StyledTitle>
         <StyledHomeContainer container >
             <StyledHomeGridItem item xs={12} sm={12} md={6} lg={4} xl={4}>

@@ -9,10 +9,12 @@ import GlobalStyle from './style/globalStyle'
 
 //COMPONENTS
 
+import Header from './components/header'
 
 //HOOKS
 
 import usePage from './hooks/usePage'
+import useWallet from './hooks/useWallet'
 
 //MUI-MATERIAL
 
@@ -31,6 +33,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 function App() {
 
   const pages = usePage()
+  const wallets = useWallet()
 
   const darkTheme = createTheme({
     palette: {
@@ -63,6 +66,7 @@ function App() {
         <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
         <Web3ReactProvider getLibrary={getLibrary}>
+          <Header {...pages} {...wallets} />
           <Home {...pages} />
         </Web3ReactProvider>
         </ThemeProvider>
@@ -78,6 +82,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
           <Web3ReactProvider getLibrary={getLibrary}>
+            <Header {...pages} {...wallets} />
             <BSCMemepad {...pages} />
           </Web3ReactProvider>
         </ThemeProvider>

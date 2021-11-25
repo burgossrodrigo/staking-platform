@@ -5,15 +5,8 @@ import GlobalStyle from '../../style/globalStyle'
 
 //COMPONENTS
 
-import Header from '../../components/header'
-import useWallet from '../../hooks/useWallet'
 import { StyledCard, CardWrapper, StyledBodyText } from '../../components/cardContent'
 import BasicTabs from '../../components/tabs'
-
-
-//HOOKS
-
-import usePage from '../../hooks/usePage'
 
 //MUI-MATERIAL
 
@@ -32,18 +25,11 @@ import { Web3ReactProvider } from '@web3-react/core'
 
 function BSCMemepad() {
 
-  const wallet = useWallet()
-
-
-
-  const pages = usePage()
-
   return (<>
     
       <GlobalStyle />
       <Web3ReactProvider getLibrary={getLibrary}>
         <Container maxWidth='lg'>
-          <Header {...wallet} {...pages} />
         </Container>
         <Grid container>
           <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
