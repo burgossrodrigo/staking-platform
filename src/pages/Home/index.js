@@ -81,8 +81,17 @@ const Home = () => {
     
     `
 
+    const StyledTitle = styled(Typography)`
+    
+        margin: 0 20% 0;
+        margin-top: 15vh;
+        color: black;
+    
+    `
+
     return (<>
         <Header {...page} {...wallet} />
+        <StyledTitle variant="h2" color="contrast">Active and upcoming vaults</StyledTitle>
         <StyledHomeContainer container>
             <StyledHomeGridItem item xs={12} sm={12} md={6} lg={4} xl={4}>
                 <StyledCard>
