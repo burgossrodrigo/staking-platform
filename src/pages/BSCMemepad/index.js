@@ -13,10 +13,10 @@ import BasicTabs from '../../components/tabs'
 
 //HOOKS
 
+import usePage from '../../hooks/usePage'
 
 //MUI-MATERIAL
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Typography, Divider } from '@mui/material';
 import { Grid, Container } from '@mui/material'
 
@@ -34,32 +34,16 @@ function BSCMemepad() {
 
   const wallet = useWallet()
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'light',
-      primary: {
-        main: '#325AFF'
-      },
-      secondary:{
-        main: '#F9D842'
-      }
-    },
-    typography: {
-      fontFamily: [
-        "Inter-var", 
-        "sans-serif"
-      ].join(','),
-    },
-  });
+
+
+  const pages = usePage()
 
   return (<>
     
-
-      <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
       <Web3ReactProvider getLibrary={getLibrary}>
         <Container maxWidth='lg'>
-          <Header {...wallet} />
+          <Header {...wallet} {...pages} />
         </Container>
         <Grid container>
           <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
@@ -94,7 +78,6 @@ function BSCMemepad() {
           </Grid>
       </Grid>
       </Web3ReactProvider>
-      </ThemeProvider>
 
 
   </>);

@@ -27,7 +27,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 
 
 
-function App({page}) {
+function App() {
 
   const pages = usePage()
 
@@ -39,6 +39,9 @@ function App({page}) {
       },
       secondary:{
         main: '#F9D842'
+      },
+      contrast:{
+        main: '#000000'
       }
     },
     typography: {
@@ -49,13 +52,15 @@ function App({page}) {
     },
   });
 
+  console.log(pages)
+
   return (<>
     
 
       <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
       <Web3ReactProvider getLibrary={getLibrary}>
-        {page === 'home' ? <Home {...pages} /> : <BSCMemepad /> }    
+        {pages.page === 'home' ? <Home {...pages} /> : <BSCMemepad {...pages} /> }    
       </Web3ReactProvider>
       </ThemeProvider>
 

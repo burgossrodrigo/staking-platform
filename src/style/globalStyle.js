@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: #EAEEF3;
     font-family: "Inter var", sans-serif;
     color: #FFFFFF;
     background-repeat: no-repeat;

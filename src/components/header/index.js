@@ -9,7 +9,7 @@ import { Container, AppBar, Button,
 import useWallet from '../../hooks/useWallet'
 import banner from '../../assets/image/banner-white.png'
 
-export default function Header({openWallet, setOpenWallet}) {
+export default function Header({openWallet, setOpenWallet, page, setPage}) {
 
     const wallet = useWallet()
 
@@ -45,6 +45,12 @@ export default function Header({openWallet, setOpenWallet}) {
   width: 35vw;
   font-size: 1.8rem;
   color: white;
+  
+  `
+
+  const StyledLink = styled(Link)`
+  
+    cursor: poinet;
   
   `
 
@@ -88,12 +94,12 @@ const changeId = async () => {
 
       <img src={banner} width={200} height={50} alt="logo" />
        <StyledBreadcrumbs>
-       <Link color="secondary" underline="hover" href='/BSCMemepad'>
+       <StyledLink color="secondary" underline="hover" onClick={() => setPage('home')}>
         Home
-       </Link>
-       <Link color="secondary" underline="hover" href='/BSCMemepad'>
+       </StyledLink>
+       <StyledLink color="secondary" underline="hover" onClick={() => setPage('BSCMemepad')}>
         BSCMemepad
-       </Link>
+       </StyledLink>
        </StyledBreadcrumbs>
       <AccountDiv>{
       
