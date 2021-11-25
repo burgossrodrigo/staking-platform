@@ -58,7 +58,7 @@ const Home = () => {
     
     width: 60vw;
     height: 60vh;
-    margin-top: 15vh;
+    margin-top: 10vh;
     
     `
 
@@ -99,10 +99,15 @@ const Home = () => {
                         <StyledImg src={BScMemepad} />
                     </StyledCardBanner>
                     <StyledCardContent>
-                        <Typography color="contrast" variant="h6">
+                        <Typography color="contrast" variant="h4">
                             BSC Memepad
                         </Typography>
-                        <StyledAlert severity="success">Active</StyledAlert>                     
+                        <br />
+                        <StyledAlert severity="success">Active</StyledAlert>
+                        <br />
+                        <Typography color="contrast" variant="h6">
+                            BSCM Stakyng APY
+                        </Typography>                                             
                     </StyledCardContent>
                     <StyledCardActions>
                         <StyledButton endIcon={<ChevronRightIcon />}>RESEARCH AND STAKE</StyledButton>
@@ -113,12 +118,18 @@ const Home = () => {
             <StyledCard>
                     <StyledCardBanner>
                         <StyledImg src={KSM} />
+                        <br />
                     </StyledCardBanner>
                     <StyledCardContent>
-                    <Typography color="contrast" variant="h6">
+                    <Typography color="contrast" variant="h4">
                            BSCM-BNB LP
                         </Typography>
-                        <StyledAlert severity="info">Soon</StyledAlert>    
+                        <br />
+                        <StyledAlert severity="info">Soon</StyledAlert>
+                        <br />
+                        <Typography color="contrast" variant="h6">
+                        BSCM-BNB Stakyng APY
+                        </Typography>                               
                     </StyledCardContent>
                     <StyledCardActions>
                         <StyledButton disable={true} endIcon={<ChevronRightIcon />}>RESEARCH AND STAKE</StyledButton>
@@ -131,10 +142,15 @@ const Home = () => {
                         <StyledImg src={LP} />
                     </StyledCardBanner>
                     <StyledCardContent>
-                        <Typography color="contrast" variant="h6">
+                        <Typography color="contrast" variant="h4">
                             KCC Memepad        
                         </Typography>
-                        <StyledAlert severity="info">Soon</StyledAlert>                   
+                        <br />
+                        <StyledAlert severity="info">Soon</StyledAlert>
+                        <br />
+                        <Typography color="contrast" variant="h6">
+                            KCCM Staking APY        
+                        </Typography>                                           
                     </StyledCardContent>
                     <StyledCardActions>
                         <StyledButton disable={true} endIcon={<ChevronRightIcon />}>RESEARCH AND STAKE</StyledButton>
