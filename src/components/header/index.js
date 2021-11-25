@@ -95,7 +95,7 @@ const changeId = async () => {
     <Container maxWidth='md'>
       <StyledNavbar>
        <StyledBreadcrumbs separator=' ' color="primary">
-       <StyledLink color="secondary" underline="none" onClick={() => setPage('Home')}>
+       <StyledLink color="secondary" underline="none" onClick={() => setPage('home')}>
         Home
        </StyledLink>
        <StyledLink color="secondary" underline="none" onClick={() => setPage('BSCMemepad')}>
