@@ -15,7 +15,6 @@ import { Grid, Container } from '@mui/material'
 
 //CONNECTORS
 
-import { getLibrary } from '../../connectors'
 
 //WEB3-REACT
 
