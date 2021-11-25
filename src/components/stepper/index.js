@@ -7,6 +7,7 @@ import useBnbBalance from '../../hooks/useBnbBalance'
 import { useWeb3React } from '@web3-react/core'
 //import BNB from '../../contracts/BNB.json'
 import { web3 } from '../../constants'
+import { getLibrary } from '../../connectors'
 
 //components
 
@@ -61,6 +62,8 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
   const handleReset = () => {
     setActiveStep(0);
   };
+  
+  console.log(active + "stepper")
 
   return (
     <Box sx={{ width: '100%' }}>

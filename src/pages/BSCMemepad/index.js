@@ -19,8 +19,6 @@ import { getLibrary } from '../../connectors'
 
 //WEB3-REACT
 
-import { Web3ReactProvider } from '@web3-react/core'
-
 
 
 function BSCMemepad() {
@@ -28,7 +26,6 @@ function BSCMemepad() {
   return (<>
     
       <GlobalStyle />
-      <Web3ReactProvider getLibrary={getLibrary}>
         <Container maxWidth='lg'>
         </Container>
         <Grid container>
@@ -51,10 +48,6 @@ function BSCMemepad() {
                 </StyledCard>
 
             </CardWrapper>
-            <div>    
-                {/* STAKE YOUR BSC MEMEPAD HERE */}
-                {/* CHECKPOINTS */}
-            </div>
             <div>
                 <BasicTabs />
             </div>    
@@ -63,7 +56,6 @@ function BSCMemepad() {
             {/* form */}
           </Grid>
       </Grid>
-      </Web3ReactProvider>
 
 
   </>);

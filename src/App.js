@@ -83,7 +83,7 @@ function App() {
         <GlobalStyle />
           <Web3ReactProvider getLibrary={getLibrary}>
             <Header {...pages} {...wallets} />
-            <BSCMemepad {...pages} />
+            <BSCMemepad {...pages} {...wallets} />
           </Web3ReactProvider>
         </ThemeProvider>
 
