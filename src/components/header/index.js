@@ -7,7 +7,6 @@ import { Container, AppBar, Button,
         Modal, Box, Breadcrumbs,
         Link } from '@mui/material'
 import useWallet from '../../hooks/useWallet'
-import banner from '../../assets/image/banner-white.png'
 
 export default function Header({openWallet, setOpenWallet, page, setPage}) {
 
@@ -96,10 +95,10 @@ const changeId = async () => {
     <Container maxWidth='md'>
       <StyledNavbar>
        <StyledBreadcrumbs separator=' ' color="primary">
-       <StyledLink color="secondary" underline="hover" onClick={() => setPage('Home')}>
+       <StyledLink color="secondary" underline="none" onClick={() => setPage('Home')}>
         Home
        </StyledLink>
-       <StyledLink color="secondary" underline="hover" onClick={() => setPage('BSCMemepad')}>
+       <StyledLink color="secondary" underline="none" onClick={() => setPage('BSCMemepad')}>
         BSCMemepad
        </StyledLink>
        </StyledBreadcrumbs>
