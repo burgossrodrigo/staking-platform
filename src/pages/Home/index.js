@@ -12,7 +12,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const Home = () => {
 
-    const page = usePage()
+    const pages = usePage()
     const wallet = useWallet()
 
     const StyledCard = styled(Card)`
@@ -89,8 +89,10 @@ const Home = () => {
     
     `
 
+    console.log(pages.page)
+
     return (<>
-        <Header {...page} {...wallet} />
+        <Header {...pages} {...wallet} />
         <StyledTitle variant="h2" color="contrast">Active and upcoming vaults</StyledTitle>
         <StyledHomeContainer container >
             <StyledHomeGridItem item xs={12} sm={12} md={6} lg={4} xl={4}>

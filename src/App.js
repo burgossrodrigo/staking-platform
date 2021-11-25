@@ -1,22 +1,23 @@
+//PAGES
 
 import Home from './pages/Home'
 import BSCMemepad from './pages/BSCMemepad'
-import usePage from './hooks/usePage'
 
 //STYLE
 
 import GlobalStyle from './style/globalStyle'
-
 
 //COMPONENTS
 
 
 //HOOKS
 
+import usePage from './hooks/usePage'
 
 //MUI-MATERIAL
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 //CONNECTORS
 
 import { getLibrary } from './connectors'
@@ -52,20 +53,37 @@ function App() {
     },
   });
 
-  console.log(pages)
+  console.log(pages.page)
 
-  return (<>
+  if(pages.page === 'home'){
+
+    return (<>
+      
+
+        <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <Home {...pages} />
+        </Web3ReactProvider>
+        </ThemeProvider>
+
+
+    </>);
+
+}else if(pages.page === 'BSCMemepad'){
+
+    return (<>
+
     
+    <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <BSCMemepad {...pages} />
+          </Web3ReactProvider>
+        </ThemeProvider>
 
-      <ThemeProvider theme={darkTheme}>
-      <GlobalStyle />
-      <Web3ReactProvider getLibrary={getLibrary}>
-        {pages.page === 'home' ? <Home {...pages} /> : <BSCMemepad {...pages} /> }    
-      </Web3ReactProvider>
-      </ThemeProvider>
-
-
-  </>);
+    </>)
 }
 
+}
 export default App

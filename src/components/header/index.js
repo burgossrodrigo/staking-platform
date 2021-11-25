@@ -37,7 +37,7 @@ export default function Header({openWallet, setOpenWallet, page, setPage}) {
 	height: 5vh;
   position: relative;
   margin: 2vh;
-  margin-left: 32vw;
+  margin-left: 45vw;
   `
 
   const StyledBreadcrumbs = styled(Breadcrumbs)`
@@ -45,12 +45,16 @@ export default function Header({openWallet, setOpenWallet, page, setPage}) {
   width: 35vw;
   font-size: 1.8rem;
   color: white;
+  margin-left: 2vw;
+  margin-top: 1vh;
   
   `
 
   const StyledLink = styled(Link)`
   
-    cursor: poinet;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
   
   `
 
@@ -91,10 +95,8 @@ const changeId = async () => {
     <>
     <Container maxWidth='md'>
       <StyledNavbar>
-
-      <img src={banner} width={200} height={50} alt="logo" />
-       <StyledBreadcrumbs>
-       <StyledLink color="secondary" underline="hover" onClick={() => setPage('home')}>
+       <StyledBreadcrumbs separator=' ' color="primary">
+       <StyledLink color="secondary" underline="hover" onClick={() => setPage('Home')}>
         Home
        </StyledLink>
        <StyledLink color="secondary" underline="hover" onClick={() => setPage('BSCMemepad')}>
