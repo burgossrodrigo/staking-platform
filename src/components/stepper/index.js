@@ -4,6 +4,7 @@ import { Divider, Typography,
         Button, StepLabel, Step, 
         Stepper, Box  } from '@mui/material'
 import useBnbBalance from '../../hooks/useBnbBalance'
+import useMemepadBalance from '../../hooks/useMemepadBalance'
 import { useWeb3React } from '@web3-react/core'
 //import BNB from '../../contracts/BNB.json'
 import { web3 } from '../../constants'
@@ -28,6 +29,7 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
   const getBnbBalance = useBnbBalance()
   const getInput = useInput()
   const getOutput = useOutput()
+  const getMemepadBalance = useMemepadBalance()
 
   const tryMemepadBalance = async () => {
 
@@ -229,7 +231,7 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
 
             ?
             <StepperWrapper>
-              <StakeForm {...getBnbBalance} {...getInput} {...getOutput}/>
+              <StakeForm {...getBnbBalance} {...getInput} {...getOutput} {...getMemepadBalance}/>
             </StepperWrapper>
 
       :

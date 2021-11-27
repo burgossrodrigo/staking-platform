@@ -36,7 +36,7 @@ const StyledCardFormContent = styled(CardContent)`
 
 `
 
-const StakeForm = ({bnbBalance, input, output, setOutput}) => {
+const StakeForm = ({bnbBalance, memepadBalance, input, output, setOutput}) => {
 
 
 
@@ -86,7 +86,8 @@ const { account } = useWeb3React()
     <>
       <Grid container>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-        <StyledFormWrapper>           
+        <StyledFormWrapper>
+            <Typography variant="b1">Max: {memepadBalance}</Typography>           
             <StyledTextField id="outlined-basic" onChange={e => setOutput(e.target.value)} label={output === null ? "BNB" : output} variant="outlined" />
             <Button>Stake</Button>
         </StyledFormWrapper>
