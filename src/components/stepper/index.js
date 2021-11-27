@@ -1,28 +1,77 @@
-import * as React from 'react';
+import React from 'react';
 import StakeForm from './formStake'
-import { CardActions, Divider, Typography, 
+import { Divider, Typography, 
         Button, StepLabel, Step, 
         Stepper, Box  } from '@mui/material'
 import useBnbBalance from '../../hooks/useBnbBalance'
 import { useWeb3React } from '@web3-react/core'
 //import BNB from '../../contracts/BNB.json'
 import { web3 } from '../../constants'
+import useInput from '../../hooks/useInput'
+import useOutput from '../../hooks/useOutput'
+import BSCMemepad from '../../contracts/BSCMemepad.json'
+import Web3 from 'web3'
 
 //components
 
 import { StyledCard, StyledBodyText, StepperWrapper } from '../cardContent'
 
-const steps = ['Checkpoints', 'Ammount to stake', 'Pre-authorization', 'Confirm', 'Confirmation'];
+const steps = ['Checkpoints', 'Ammount to stake'];
 
 
 
 
-export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
+export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, memepadBalance, setMemepadBalance, input, output}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const { active, account } = useWeb3React()
   const getBnbBalance = useBnbBalance()
+  const getInput = useInput()
+  const getOutput = useOutput()
 
+  const tryMemepadBalance = async () => {
+
+    try{
+
+      if(active){
+          const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
+          const networkId = await web3.eth.net.getId();
+          const deployedNetwork = BSCMemepad.networks[networkId];
+          const bscmemepad = new web3.eth.Contract(BSCMemepad.abi, deployedNetwork && deployedNetwork.address,)
+          await bscmemepad.methods.balanceOf(account).call()
+          .then(response => setMemepadBalance(response))
+          .then(console.log(memepadBalance))
+      }        
+    }catch (err){
+        console.log(err)   
+      }
+
+    }
+
+    tryMemepadBalance()
+
+  const tryBnbBalance = async () => {
+
+    try{
+
+      if(active){
+        await web3.eth.getBalance(account) 
+        .then(response => setBnbBalance(response))
+        .then(console.log(bnbBalance))
+      }
+
+    }
+    catch(err){
+
+        console.log(err)
+
+    }
+  }
+
+  tryBnbBalance()
+
+
+  /*
   const balanceOfBnB = async () => { 
     if(active){
     await web3.eth.getBalance(account) 
@@ -31,8 +80,20 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
   }
   }
 
-  balanceOfBnB()
+  const balanceOfMemepad = async () => {
 
+    if(active){
+      await bscmemepad.methods.balanceOf(account).call()
+      .then(response => setMemepadBalance(response))
+      .then(console.log(memepadBalance))
+    }
+
+  }
+
+  balanceOfBnB()
+  balanceOfMemepad()
+  console.log(account)
+*/
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -48,7 +109,7 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
+    
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
@@ -112,7 +173,7 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
             <StyledCard>
             <Typography>BSCMPAD avaiable</Typography>
             <Divider />
-            <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+            <StyledBodyText variant='h6'>Current balance:<br />{memepadBalance}</StyledBodyText>
             </StyledCard>
 
             <StyledCard>
@@ -144,13 +205,13 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
               <StyledCard>
               <Typography>BSCMPAD avaiable</Typography>
               <Divider />
-              <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+              <StyledBodyText variant='h6'></StyledBodyText>
               </StyledCard>
 
               <StyledCard>
               <Typography >BNB avaiable</Typography>
               <Divider />
-              <StyledBodyText variant='h6'>Current balance:</StyledBodyText>
+              <StyledBodyText variant='h6'></StyledBodyText>
               </StyledCard>
 
               <StyledCard>
@@ -168,74 +229,8 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
 
             ?
             <StepperWrapper>
-              <StakeForm {...getBnbBalance}/>
+              <StakeForm {...getBnbBalance} {...getInput} {...getOutput}/>
             </StepperWrapper>
-
-            :
-
-            activeStep === 2
-
-            ? <StepperWrapper>
-        
-            <StyledCard>
-                <Typography>Pre-authorization</Typography>
-                <Divider />
-                <StyledBodyText variant='h6'>You want to stake the amount of {} BNB with </StyledBodyText>
-                <StyledBodyText variant='h6'>the amount of {} BSCMEMEPAD?</StyledBodyText>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    I want to
-                  </Button>
-              </CardActions>
-            </StyledCard>
-
-            <StyledCard>
-            </StyledCard>
-
-            <StyledCard>
-            </StyledCard>              
-
-        </StepperWrapper>
-
-        :
-
-        activeStep === 3
-
-        ? <StepperWrapper>
-            <StyledCard>
-            </StyledCard>
-
-            <StyledCard>
-            <Typography>Authorization</Typography>
-                <Divider />
-                <StyledBodyText variant='h6'>Stake the amount of {} BNB with </StyledBodyText>
-                <StyledBodyText variant='h6'>the amount of {} BSCMEMEPAD</StyledBodyText>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Stake
-                  </Button>
-              </CardActions>
-            </StyledCard>
-
-            <StyledCard>
-            </StyledCard>
-        </StepperWrapper>
-
-        : activeStep === 4
-        ? <StepperWrapper>
-        <StyledCard>
-        </StyledCard>
-
-        <StyledCard>
-        </StyledCard>
-
-        <StyledCard>
-        <Typography>Authorization</Typography>
-                <Divider />
-                <StyledBodyText variant='h6'></StyledBodyText>
-                <StyledBodyText variant='h6'></StyledBodyText>
-        </StyledCard>
-    </StepperWrapper>
 
       :
 
@@ -281,7 +276,7 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance}) {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
 
-            <Button onClick={handleNext} disabled={!active}>
+            <Button onClick={handleNext} disabled={!active || memepadBalance === 0}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>

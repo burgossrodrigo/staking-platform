@@ -15,12 +15,41 @@ import { Grid, Container } from '@mui/material'
 
 //CONNECTORS
 
+import Web3 from 'web3'
 
-//WEB3-REACT
+//CONTRACTS
+
+import StakeBSCM from '../../contracts/StakeBSCM.json'
+import { useEffect, useState } from 'react';
 
 
 
 function BSCMemepad() {
+
+  const [stakers, setStakers] = useState()
+
+  useEffect(() => {
+  const getTotalStakers = async () => {
+    try{  
+
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://speedy-nodes-nyc.moralis.io/612149607c11b2845c0e0559/bsc/mainnet'))
+    const stakebscm = new web3.eth.Contract(StakeBSCM.abi, '0x9ffFF3B55B307E0B4bedbf5FFBf4Ee1B0e16ced0')    
+    const TOTAL_STAKERS = await stakebscm.methods.totalStakers().call()
+    console.log(TOTAL_STAKERS)
+    setStakers(TOTAL_STAKERS)
+
+  } catch (err){
+
+    console.log(err)
+
+  }
+}
+  getTotalStakers()
+}, [])
+
+
+
+
 
   return (<>
     
@@ -33,7 +62,7 @@ function BSCMemepad() {
                 <StyledCard>
                   <Typography variant='h5'>Number os stakers</Typography>
                   <Divider />
-                  <StyledBodyText variant='h6'>1000</StyledBodyText>
+                  <StyledBodyText variant='h6'>{stakers}</StyledBodyText>
                 </StyledCard>
                 <StyledCard>
                 <Typography variant='h5'>Total staked</Typography>

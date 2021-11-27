@@ -6,5 +6,6 @@ export const StyledFormWrapper = styled.div`
     flex-direction: column;
     margin-top: 10vh;
     margin-left: 3vw;
+    
 
 `

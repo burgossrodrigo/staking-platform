@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import { TextField, Box, Slider } from '@mui/material'
+import { TextField, Button, Card,
+  CardActions , CardContent, Typography,
+  Grid } from '@mui/material'
 import styled from 'styled-components'
 import { StyledFormWrapper } from '..'
-import { web3 } from '../../utils/web3'
-import { useWeb3React } from '@web3-react/core'
-import { Typography } from '@mui/material'
+import StakeBSCM from '../../contracts/StakeBSCM.json'
+import Web3 from 'web3'
+import { useWeb3React } from '@web3-react/core' 
 
 const StyledTextField = styled(TextField)`
 
@@ -12,20 +13,32 @@ const StyledTextField = styled(TextField)`
 
 `
 
-const StakeForm = ({bnbBalance, setBnbBalance}) => {
+const StyledCardForm = styled(Card)`
 
-  const { account, active } = useWeb3React()
-  const [formValue, setformValue] = useState()
+  width: 30vw;
+  margin-left: 2vw;
+  margin-top: 12vh;
 
-  const balanceOfBnB = async () => { 
-    if(active){
-    await web3.eth.getBalance(account) 
-    .then(response => setBnbBalance(response))
-    .then(console.log(bnbBalance))
-  }
-  }
 
-  balanceOfBnB()
+`
+
+const StyledCardFormAction = styled(CardActions)`
+
+  
+
+
+`
+
+const StyledCardFormContent = styled(CardContent)`
+
+  
+
+
+`
+
+const StakeForm = ({bnbBalance, input, output, setOutput}) => {
+
+
 
 
 /*
@@ -38,47 +51,58 @@ const StakeForm = ({bnbBalance, setBnbBalance}) => {
 
     }
 
-*/    
+*/
 
-    const ethData = bnbBalance
-    function valuetext() {
-        return `${ethData}%`;
-      }
+console.log(input, output)
 
-      const handleChange = (e) => {
+const { account } = useWeb3React()
 
-        setformValue(e.target.value);
+  const setStake = async () => {
+    try{  
 
-      }
-      
-    function DiscreteSlider() {
-        return (
-          <Box sx={{ width: 300 }}>
-            <Slider
-              aria-label="TOkens"
-              defaultValue={30}
-              getAriaValueText={valuetext}
-              valueLabelDisplay="auto"
-              step={5}
-              marks
-              min={0}
-              max={100}
-            />
-          </Box>
-        );
-      }
+     
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = StakeBSCM.networks[networkId];
+    const stakebscm = new web3.eth.Contract(StakeBSCM.abi, deployedNetwork && deployedNetwork.address,)
+    const addresses = await web3.eth.getAccounts(); 
+    console.log(addresses[0])  
+    await stakebscm.methods.stake(output).send({from: account})
+    .then(function(receipt){console.log(receipt)})
+
+    
+
+  } catch (err){
+
+    console.log(err)
+
+  }
+}
+
+
 
     return(
     
     <>
-        <StyledFormWrapper>
-            <Typography>Max: {bnbBalance}</Typography>
-            <StyledTextField id="outlined-basic" onChange={handleChange} label={formValue === null ? "BNB" : formValue} variant="outlined" />
-            <DiscreteSlider />
-            <Typography>Max: {bnbBalance}</Typography>            
-            <StyledTextField id="outlined-basic" label="BSCMEMEPAD" variant="outlined" />
-            <DiscreteSlider />
+      <Grid container>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <StyledFormWrapper>           
+            <StyledTextField id="outlined-basic" onChange={e => setOutput(e.target.value)} label={output === null ? "BNB" : output} variant="outlined" />
+            <Button>Stake</Button>
         </StyledFormWrapper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <StyledCardForm>
+            <StyledCardFormContent>
+              <Typography variant="b1">Stake the amount of Memepad {output}</Typography><br />
+            </StyledCardFormContent>
+            <StyledCardFormAction>
+              <Button variant="outlined" onClick={() => { setStake() }}>Stake</Button>
+            </StyledCardFormAction>
+          </StyledCardForm>
+        </Grid>
+
+      </Grid>
     </>
     
     )
