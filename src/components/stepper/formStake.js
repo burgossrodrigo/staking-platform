@@ -57,17 +57,16 @@ console.log(input, output)
 
 const { account } = useWeb3React()
 
+console.log(account)
+
   const setStake = async () => {
     try{  
 
      
-    const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = StakeBSCM.networks[networkId];
-    const stakebscm = new web3.eth.Contract(StakeBSCM.abi, deployedNetwork && deployedNetwork.address,)
-    const addresses = await web3.eth.getAccounts(); 
-    console.log(addresses[0])  
-    await stakebscm.methods.stake(output).send({from: account})
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://speedy-nodes-nyc.moralis.io/612149607c11b2845c0e0559/bsc/mainnet'))
+    const stakebscm = new web3.eth.Contract(StakeBSCM.abi, '0x9ffFF3B55B307E0B4bedbf5FFBf4Ee1B0e16ced0')
+    const stakingValue = web3.utils.toWei(output)
+    await stakebscm.methods.stake(stakingValue).send({from: account})
     .then(function(receipt){console.log(receipt)})
 
     
@@ -87,7 +86,7 @@ const { account } = useWeb3React()
       <Grid container>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
         <StyledFormWrapper>
-            <Typography variant="b1">Max: {memepadBalance}</Typography>           
+            <Typography variant="b1" color="secondary">Max: {memepadBalance}</Typography>           
             <StyledTextField id="outlined-basic" onChange={e => setOutput(e.target.value)} label={output === null ? "BNB" : output} variant="outlined" />
             <Button>Stake</Button>
         </StyledFormWrapper>

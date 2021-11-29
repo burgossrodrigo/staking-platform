@@ -1,17 +1,18 @@
 import React from 'react';
-import StakeForm from './formStake'
 import { Divider, Typography, 
         Button, StepLabel, Step, 
         Stepper, Box  } from '@mui/material'
-import useBnbBalance from '../../hooks/useBnbBalance'
-import useMemepadBalance from '../../hooks/useMemepadBalance'
 import { useWeb3React } from '@web3-react/core'
 //import BNB from '../../contracts/BNB.json'
 import { web3 } from '../../constants'
-import useInput from '../../hooks/useInput'
-import useOutput from '../../hooks/useOutput'
 import BSCMemepad from '../../contracts/BSCMemepad.json'
 import Web3 from 'web3'
+import { TextField, Card,
+  CardActions , CardContent,
+  Grid } from '@mui/material'
+import styled from 'styled-components'
+import { StyledFormWrapper } from '..'
+import StakeBSCM from '../../contracts/StakeBSCM.json'
 
 //components
 
@@ -20,16 +21,39 @@ import { StyledCard, StyledBodyText, StepperWrapper } from '../cardContent'
 const steps = ['Checkpoints', 'Ammount to stake'];
 
 
+const StyledTextField = styled(TextField)`
+
+    margin-top: 10px;
+
+`
+
+const StyledCardForm = styled(Card)`
+
+  width: 30vw;
+  margin-left: 2vw;
+  margin-top: 12vh;
 
 
-export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, memepadBalance, setMemepadBalance, input, output}) {
+`
+
+const StyledCardFormAction = styled(CardActions)`
+
+  
+
+
+`
+
+const StyledCardFormContent = styled(CardContent)`
+
+  
+
+
+`
+
+export default function HorizontalLinearStepper({setBnbBalance, setOutput, bnbBalance, memepadBalance, setMemepadBalance, input, output}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const { active, account } = useWeb3React()
-  const getBnbBalance = useBnbBalance()
-  const getInput = useInput()
-  const getOutput = useOutput()
-  const getMemepadBalance = useMemepadBalance()
 
   const tryMemepadBalance = async () => {
 
@@ -43,6 +67,8 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
           await bscmemepad.methods.balanceOf(account).call()
           .then(response => setMemepadBalance(response))
           .then(console.log(memepadBalance))
+
+          
       }        
     }catch (err){
         console.log(err)   
@@ -57,9 +83,10 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
     try{
 
       if(active){
-        await web3.eth.getBalance(account) 
+        await web3.eth.fromWei.getBalance(account) 
         .then(response => setBnbBalance(response))
         .then(console.log(bnbBalance))
+
       }
 
     }
@@ -71,6 +98,26 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
   }
 
   tryBnbBalance()
+
+  const setStake = async () => {
+    try{  
+
+     
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc.getblock.io/mainnet/?api_key=0edbc7d4-4b09-4a42-b8e7-2126446d9fe2'))
+    const stakebscm = new web3.eth.Contract(StakeBSCM.abi, '0x9ffFF3B55B307E0B4bedbf5FFBf4Ee1B0e16ced0')
+    await stakebscm.methods.stake(output).send({from: account})
+    .then(function(receipt){console.log(receipt)})
+
+    
+
+  } catch (err){
+
+    console.log(err)
+    console.log(account)
+
+  }
+}
+
 
 
   /*
@@ -231,7 +278,25 @@ export default function HorizontalLinearStepper({setBnbBalance, bnbBalance, meme
 
             ?
             <StepperWrapper>
-              <StakeForm {...getBnbBalance} {...getInput} {...getOutput} {...getMemepadBalance}/>
+            <Grid container>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <StyledFormWrapper>
+                <Typography variant="b1" color="secondary">Max: {memepadBalance}</Typography>           
+                <StyledTextField id="outlined-basic" onChange={e => setOutput(e.target.value)} label={output === null ? "BNB" : output} variant="outlined" />
+                <Button>Stake</Button>
+            </StyledFormWrapper>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <StyledCardForm>
+                <StyledCardFormContent>
+                  <Typography variant="b1">Stake the amount of Memepad {output}</Typography><br />
+                </StyledCardFormContent>
+                <StyledCardFormAction>
+                  <Button variant="outlined" onClick={() => { setStake() }}>Stake</Button>
+                </StyledCardFormAction>
+              </StyledCardForm>
+            </Grid>
+            </Grid>
             </StepperWrapper>
 
       :
